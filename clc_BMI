@@ -1,20 +1,16 @@
 from tkinter import *
 from tkinter import messagebox
-
 def reset_entry():
     age_tf.delete(0,'end') #для возраста
     height_tf.delete(0,'end')#для роста
     weight_tf.delete(0,'end')#для веса
-
 def calculate_bmi():
     kg = int(weight_tf.get())#эта строка кода получает вес пользователя, преобразует его в целые числа, а затем сохраняет значение в переменной kg
     m = int(height_tf.get())/100 #эта строка кода получает рост пользователя, преобразует его в целые числа, делит результат на 100, чтобы сантиметры превратились в метры, а затем сохраняет его в переменной m
     bmi = kg/(m*m)#это формула для определения ИМТ. Мы сохранили формулу в переменной BMI.
     bmi = round(bmi, 1)#до округления результат отображался в нескольких десятичных значениях.
     bmi_index(bmi)#Мы вызвали функцию bmi_index() для сравнения значения ИМТ с категориями ИМТ.
-
 def bmi_index(bmi):
-    
     if bmi < 18.5:
         messagebox.showinfo('bmi-pythonguides', f'BMI = {bmi} имеется недостаток веса')
     elif (bmi > 18.5) and (bmi < 24.9):
@@ -25,22 +21,17 @@ def bmi_index(bmi):
         messagebox.showinfo('bmi-pythonguides', f'BMI = {bmi} ожирение ') 
     else:
         messagebox.showerror('bmi-pythonguides', 'что-то пошло не так!')   
-
 ws = Tk()
 ws.title('PythonGuides')
 ws.geometry('400x300')
 ws.config(bg='#686e70')
-
 var = IntVar()
-
 frame = Frame(
     ws,
     padx=10, 
     pady=10
 )
 frame.pack(expand=True)
-
-
 age_lb = Label(
     frame,
     text="Введите возраст (2 - 120)"
@@ -51,7 +42,6 @@ age_tf = Entry(
     frame, 
 )
 age_tf.grid(row=1, column=2, pady=5)
-
 gen_lb = Label(
     frame,
     text='Выберите свой пол'
@@ -62,7 +52,6 @@ frame2 = Frame(
     frame
 )
 frame2.grid(row=2, column=2, pady=5)
-
 male_rb = Radiobutton(
     frame2,
     text = 'муж.',
@@ -70,7 +59,6 @@ male_rb = Radiobutton(
     value = 1
 )
 male_rb.pack(side=LEFT)
-
 female_rb = Radiobutton(
     frame2,
     text = 'жен.',
@@ -78,7 +66,6 @@ female_rb = Radiobutton(
     value = 2
 )
 female_rb.pack(side=RIGHT)
-
 height_lb = Label(
     frame,
     text="Введите свой рост (см)  "
@@ -88,15 +75,12 @@ height_lb.grid(row=3, column=1)
 weight_lb = Label(
     frame,
     text="Введите свой вес (кг)  ",
-
 )
 weight_lb.grid(row=4, column=1)
-
 height_tf = Entry(
     frame,
 )
 height_tf.grid(row=3, column=2, pady=5)
-
 weight_tf = Entry(
     frame,
 )
@@ -106,14 +90,12 @@ frame3 = Frame(
     frame
 )
 frame3.grid(row=5, columnspan=3, pady=10)
-
 cal_btn = Button(
     frame3,
     text='Расчитать',
     command=calculate_bmi
 )
 cal_btn.pack(side=LEFT)
-
 reset_btn = Button(
     frame3,
     text='Обнулть',
@@ -127,5 +109,4 @@ exit_btn = Button(
     command=lambda:ws.destroy()
 )
 exit_btn.pack(side=RIGHT)
-
 ws.mainloop()
